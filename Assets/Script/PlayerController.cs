@@ -39,9 +39,9 @@ public class PlayerController : MonoBehaviour
     }
     private void LateUpdate()
     {
-        if(isRunning)
+        if (isRunning)
         {
-            Run();
+            Running();
         }
         if (canLook)
             Look();
@@ -102,15 +102,16 @@ public class PlayerController : MonoBehaviour
     {
         Ray[] rays = new Ray[4]
         {
-            new Ray(transform.position + (transform.forward* 0.2f) + (transform.up * 0.01f), Vector3.down),
-            new Ray(transform.position + (-transform.forward* 0.2f) + (transform.up * 0.01f), Vector3.down),
-            new Ray(transform.position + (transform.right* 0.2f) + (transform.up * 0.01f), Vector3.down),
-            new Ray(transform.position + (-transform.right* 0.2f) + (transform.up * 0.01f), Vector3.down)
+            new Ray(transform.position + (transform.forward * 0.5f) + (transform.up * 0.01f), Vector3.down),
+            new Ray(transform.position + (-transform.forward * 0.5f) + (transform.up * 0.01f), Vector3.down),
+            new Ray(transform.position + (transform.right * 0.5f) + (transform.up * 0.01f), Vector3.down),
+            new Ray(transform.position + (-transform.right * 0.5f) + (transform.up * 0.01f), Vector3.down)
         };
 
         for (int i = 0; i < rays.Length; i++)
         {
-            if (Physics.Raycast(rays[i], 0.1f, groundLayerMask))
+            //Debug.DrawRay(rays[i].origin, rays[i].direction * 1.3f, Color.red);
+            if (Physics.Raycast(rays[i], 1.3f, groundLayerMask))
             {
                 return true;
             }
@@ -118,7 +119,7 @@ public class PlayerController : MonoBehaviour
         return false;
     }
 
-    void Run()
+    void Running()
     {
         CharacterManager.Instance.Player.conditions.uiCondition.stamina.Subtract(CharacterManager.Instance.Player.conditions.uiCondition.stamina.passiveValue * 5 * Time.deltaTime);
     }
