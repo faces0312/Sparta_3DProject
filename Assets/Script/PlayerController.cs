@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour
     public float jumpPower;
     private Vector2 curMovementInput;
     public LayerMask groundLayerMask;
+    public bool isRunning;//달리기중인지
 
     [Header("Look")]
     public Transform cameraContainer;
@@ -30,6 +31,7 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
+        moveSpeed = 5f;
     }
     private void FixedUpdate()
     {
@@ -37,6 +39,10 @@ public class PlayerController : MonoBehaviour
     }
     private void LateUpdate()
     {
+        if(isRunning)
+        {
+            Run();
+        }
         if (canLook)
             Look();
     }
@@ -78,6 +84,19 @@ public class PlayerController : MonoBehaviour
             _rigidbody.AddForce(Vector2.up * jumpPower, ForceMode.Impulse);
         }
     }
+    public void OnRun(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Performed && IsRun())
+        {
+            isRunning = true;
+            moveSpeed = 8f;
+        }
+        else if(context.phase == InputActionPhase.Canceled)
+        {
+            isRunning = false;
+            moveSpeed = 5f;
+        }
+    }
 
     bool IsGrounded()
     {
@@ -97,5 +116,18 @@ public class PlayerController : MonoBehaviour
             }
         }
         return false;
+    }
+
+    void Run()
+    {
+        CharacterManager.Instance.Player.conditions.uiCondition.stamina.Subtract(CharacterManager.Instance.Player.conditions.uiCondition.stamina.passiveValue * 5 * Time.deltaTime);
+    }
+
+    bool IsRun()
+    {
+        if (CharacterManager.Instance.Player.conditions.uiCondition.stamina.curValue > 0)
+            return true;
+        else
+            return false;
     }
 }
