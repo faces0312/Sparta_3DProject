@@ -4753,7 +4753,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   curValue: 0
   maxValue: 100
-  useValue: 0
   passiveValue: 0
   uiBar: {fileID: 673911167}
 --- !u!1 &550897001
@@ -5069,6 +5068,7 @@ MonoBehaviour:
   groundLayerMask:
     serializedVersion: 2
     m_Bits: 55
+  isRunning: 0
   cameraContainer: {fileID: 1823475241}
   minXLook: -85
   maxXLook: 85
@@ -5295,7 +5295,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   curValue: 0
   maxValue: 100
-  useValue: 20
   passiveValue: 5
   uiBar: {fileID: 2055895357}
 --- !u!1 &628987170
