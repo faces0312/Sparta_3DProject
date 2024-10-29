@@ -6,6 +6,7 @@ using System;
 
 public class PlayerController : MonoBehaviour
 {
+    public Action inventory;
     private Rigidbody _rigidbody;
 
     [Header("Movement")]
@@ -130,5 +131,16 @@ public class PlayerController : MonoBehaviour
             return true;
         else
             return false;
+    }
+
+    public void OnInventory(InputAction.CallbackContext context)
+    {
+        if(context.phase == InputActionPhase.Started)
+        {
+            inventory?.Invoke();
+            bool toggle = Cursor.lockState == CursorLockMode.Locked;
+            Cursor.lockState = toggle ? CursorLockMode.None : CursorLockMode.Locked;
+            canLook = !toggle;
+        }
     }
 }
