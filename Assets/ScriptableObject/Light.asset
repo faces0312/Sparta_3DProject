@@ -15,7 +15,5 @@ MonoBehaviour:
   displayName: "\uC190\uC804\uB4F1"
   description: "\uC55E\uC744 \uBC1D\uD600\uC904 \uC218 \uC788\uB294 \uC190\uC804\uB4F1\uC774\uB2E4"
   type: 1
-  icon: {fileID: 7482667652216324306, guid: 8ab44e63845787e4b890362958367595, type: 3}
-  dropPrefab: {fileID: 2398585471151398352, guid: 7dac47ba58d459541a951e489433c5c2, type: 3}
-  canStack: 0
-  maxStackAmount: 0
+  icon: {fileID: 21300000, guid: e61976ceaf6919c47853f5a7ea09288b, type: 3}
+  equipPrefab: {fileID: 7407355058130012165, guid: 9df0c1c627fc7c14ea537b5e17e5cecf, type: 3}
