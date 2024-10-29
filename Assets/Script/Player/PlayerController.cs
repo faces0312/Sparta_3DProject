@@ -14,7 +14,8 @@ public class PlayerController : MonoBehaviour
     public float jumpPower;
     private Vector2 curMovementInput;
     public LayerMask groundLayerMask;
-    public bool isRunning;//달리기중인지
+    public bool isRun;//쉬프트를 누른 상태
+    public bool isTired = false;//지쳤는가
 
     [Header("Look")]
     public Transform cameraContainer;
@@ -40,10 +41,22 @@ public class PlayerController : MonoBehaviour
     }
     private void LateUpdate()
     {
-        if (isRunning)
+        /*if (isRunning && IsRun())
         {
             Running();
+        }*/
+        //쉬프트를 누르면서 
+        if(isRun && IsRun() && isTired == false)
+        {
+            moveSpeed = 8f;
+            Running();
         }
+        else
+        {
+            moveSpeed = 5f;
+        }
+
+
         if (canLook)
             Look();
     }
@@ -87,16 +100,31 @@ public class PlayerController : MonoBehaviour
     }
     public void OnRun(InputAction.CallbackContext context)
     {
-        if (context.phase == InputActionPhase.Performed && IsRun())
+        if (context.phase == InputActionPhase.Performed)
         {
-            isRunning = true;
-            moveSpeed = 8f;
+            isRun = true;
         }
-        else if(context.phase == InputActionPhase.Canceled)
+        else// if(context.phase == InputActionPhase.Canceled)
         {
-            isRunning = false;
-            moveSpeed = 5f;
+            isRun = false;
         }
+    }
+
+    bool IsRun()
+    {
+        if (CharacterManager.Instance.Player.conditions.uiCondition.stamina.curValue > 0)
+            return true;
+        else
+        {
+            isTired = true;
+            Invoke("TiredEnd", 5f);
+            return false;
+        }
+    }
+
+    void TiredEnd()
+    {
+        isTired = false;
     }
 
     bool IsGrounded()
@@ -122,15 +150,7 @@ public class PlayerController : MonoBehaviour
 
     void Running()
     {
-        CharacterManager.Instance.Player.conditions.uiCondition.stamina.Subtract(CharacterManager.Instance.Player.conditions.uiCondition.stamina.passiveValue * 5 * Time.deltaTime);
-    }
-
-    bool IsRun()
-    {
-        if (CharacterManager.Instance.Player.conditions.uiCondition.stamina.curValue > 0)
-            return true;
-        else
-            return false;
+        CharacterManager.Instance.Player.conditions.uiCondition.stamina.Subtract(CharacterManager.Instance.Player.conditions.uiCondition.stamina.passiveValue * 7 * Time.deltaTime);
     }
 
     public void OnInventory(InputAction.CallbackContext context)
