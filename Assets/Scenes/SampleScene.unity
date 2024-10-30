@@ -20674,7 +20674,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1395682068
 Transform:
   m_ObjectHideFlags: 0
@@ -34658,6 +34658,7 @@ GameObject:
   - component: {fileID: 2050000445516547663}
   - component: {fileID: 7652481505758131071}
   - component: {fileID: 665837936760352266}
+  - component: {fileID: 8685588116453389635}
   m_Layer: 0
   m_Name: Tunnel_Door_1
   m_TagString: Untagged
@@ -35263,6 +35264,19 @@ Transform:
   - {fileID: 6736474634672620161}
   m_Father: {fileID: 5496428793923749141}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8685588116453389635
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5769575891163559879}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0531add65840a19458c346cf5e7d4023, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  directionLight: {fileID: 705507993}
 --- !u!64 &8735197472932410834
 MeshCollider:
   m_ObjectHideFlags: 0
