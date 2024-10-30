@@ -134,6 +134,10 @@ public class UIInventory : MonoBehaviour
     {
         if(selectedItem.type == ItemType.Useable)
         {
+            if(selectedItem.Is_Key == true)
+            {
+                DoorManager.Instance.Open_Door(selectedItem.index);
+            }
             RemoveSelectedItem();
         }
     }

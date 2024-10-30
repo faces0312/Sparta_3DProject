@@ -15,9 +15,8 @@ public class PlayerConditions : MonoBehaviour, IDamagable
     Condition stamina { get { return uiCondition.stamina; } }
 
     public event Action onTakeDamage;//데미지를 받았을때의 이벤트 액션 등록
-    public event Action onUseStamina;//달릴때 드는 스태미나
 
-    private void Update()
+    private void LateUpdate()
     {
         //스테미나 자동 충전 값
         stamina.Add(stamina.passiveValue * Time.deltaTime);
@@ -43,4 +42,6 @@ public class PlayerConditions : MonoBehaviour, IDamagable
         health.Subtract(damageAmount);
         onTakeDamage?.Invoke();
     }
+
+
 }

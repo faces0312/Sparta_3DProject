@@ -20,4 +20,8 @@ public class ItemData : ScriptableObject
 
     [Header("Equip")]
     public GameObject equipPrefab;
+
+    [Header("Key")]
+    public bool Is_Key;
+    public int index;
 }

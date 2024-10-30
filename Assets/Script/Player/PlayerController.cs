@@ -39,16 +39,12 @@ public class PlayerController : MonoBehaviour
     {
         Move();
     }
-    private void LateUpdate()
+    private void Update()
     {
-        /*if (isRunning && IsRun())
-        {
-            Running();
-        }*/
+
         //쉬프트를 누르면서 
-        if(isRun && IsRun() && isTired == false)
+        if (isRun && isTired == false && IsRun())
         {
-            moveSpeed = 8f;
             Running();
         }
         else
@@ -110,9 +106,15 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    bool IsRun()
+    void Running()
     {
-        if (CharacterManager.Instance.Player.conditions.uiCondition.stamina.curValue > 0)
+        moveSpeed = 8f;
+        CharacterManager.Instance.Player.conditions.uiCondition.stamina.Subtract(CharacterManager.Instance.Player.conditions.uiCondition.stamina.passiveValue * 7 * Time.deltaTime);
+    }
+
+    public bool IsRun()
+    {
+        if (CharacterManager.Instance.Player.conditions.uiCondition.stamina.curValue > 1f)
             return true;
         else
         {
@@ -121,7 +123,6 @@ public class PlayerController : MonoBehaviour
             return false;
         }
     }
-
     void TiredEnd()
     {
         isTired = false;
@@ -146,11 +147,6 @@ public class PlayerController : MonoBehaviour
             }
         }
         return false;
-    }
-
-    void Running()
-    {
-        CharacterManager.Instance.Player.conditions.uiCondition.stamina.Subtract(CharacterManager.Instance.Player.conditions.uiCondition.stamina.passiveValue * 7 * Time.deltaTime);
     }
 
     public void OnInventory(InputAction.CallbackContext context)
